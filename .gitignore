@@ -1,0 +1,7 @@
+loader_aslr_solver
+*~
+*.o
+*.elf
+Thumbs.db
+.*/
+!.github/
