@@ -33,12 +33,12 @@ std::array<RngInfo, 64> g_rnginfo_list;
 std::vector<ThreadArguments> g_thread_args;
 
 void ThreadFunction(const ThreadArguments &args) {
+    Mt19937 mt;
     for (uint64_t tv = args.low; tv < args.high - 1; ++tv) {
         if ((tv & 0xFFFFF) == 0 && args.low == 0) {
             printf("0: %07lx/%07lx\n", tv, args.high);
         }
 
-        Mt19937 mt;
         mt.Seed(tv);
 
         bool correct = true;
