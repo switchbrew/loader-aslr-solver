@@ -11,7 +11,9 @@ These scripts assume AddressSpace64Bit, adjust as needed if that's not the case.
 * Copy the output following the `RNG output...` line from the above into a file, then generate the ASLR codebin addr for each process by running: `./get_aslr_baseaddrs_from_samples.py {rngout_file}`
 
 # Building
-`g++ -std=gnu++17 -Ofast -o loader_aslr_solver Mt19937.cpp loader_aslr_solver.cpp`
+Building with libc++ is required for using the libc++ impl of `std::uniform_int_distribution`.
+
+`clang++ -stdlib=libc++ -std=gnu++17 -Ofast -o loader_aslr_solver Mt19937.cpp loader_aslr_solver.cpp`
 
 # Credits
 * Includes code which is based on code by SciresM from elsewhere.
