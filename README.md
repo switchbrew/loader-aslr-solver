@@ -3,6 +3,8 @@ This bruteforces the Switch RNG seed used by Loader for the ASLR codebin addrs, 
 
 These scripts assume AddressSpace64Bit, adjust as needed if that's not the case.
 
+The sample data must be from a system running the official Loader, and on a system-version prior to 15.0.0 (vuln is fixed with 15.0.0+).
+
 * Create file `launched_processes_list_{sysver}` where each line is a programid, beginning with the ProgramId for Boot2, then add the ProgramIds for your sysver from here: https://switchbrew.org/wiki/Boot2 Then add ProgramIds 0100000000001000 and 010000000000100C to the file.
 * Then run `./sysupdate_get_nso_sizes.sh {sysupdatedir} > {sysupdatedir}/titles_hactool_bssend`. Then run `./get_loader_rng_max_from_titlelist.py launched_processes_list_{sysver} {path(s) to the previously generated titles_hactool_bssend files, starting with the one for the target sysver then older ones afterwards} > {sysupdatedir}/titles_loader_rng_maxval`
 * Then create a samples file, where each line is: `{id matching an id from titles_loader_rng_maxval} {(codebin_baseaddr-0x8000000)>>21}` (adjust the latter if not AddressSpace64Bit)
